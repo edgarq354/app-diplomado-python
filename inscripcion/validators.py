@@ -7,6 +7,5 @@ def validar_monto(value):
                               params={"value": value})
                               
 def validar_nombre(value):
-    if value == "Comida":
-        raise ValidationError('%(value)s no es un texto permitido',
-                              params={"value": value})
+    if not value.isalpha():
+        raise ValidationError('El nombre solo debe contener letras.')
