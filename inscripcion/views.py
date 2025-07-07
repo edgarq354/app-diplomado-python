@@ -4,8 +4,8 @@ from rest_framework import generics, viewsets
 from rest_framework.decorators import api_view
 
 from .forms import InscripcionForm
-from .models import Estudiante, Curso, Costo
-from .serializers import (EstudianteSerializer, CostoSerializer)
+from .models import Estudiante, Curso, Costo, Inscripcion
+from .serializers import (EstudianteSerializer, CostoSerializer, InscripcionSerializer)
 
 
 def index(request):
@@ -83,6 +83,33 @@ class CostoViewSet(viewsets.ModelViewSet):
 class CostoCreateView(generics.CreateAPIView, generics.ListAPIView):
     queryset = Costo.objects.all()
     serializer_class = CostoSerializer
+
+#Inscripciones
+def inscripcionFormView(request):
+    form = InscripcionForm()
+    inscripcion = None
+
+    id_inscripcion = request.GET.get('id')
+    if id_inscripcion:
+        inscripcion = get_object_or_404(Producto, id=id_inscripcion)
+        form = InscripcionForm(instance=inscripcion)
+
+    if request.method == 'POST':
+        if inscripcion:
+            form = InscripcionForm(request.POST, instance=inscripcion)
+        else:
+            form = InscripcionForm(request.POST)
+
+    if form.is_valid():
+        form.save()
+
+    return render(request, 'form_inscripciones.html', {
+        "form": form
+    })
+
+class InscripcionCreateView(generics.CreateAPIView, generics.ListAPIView):
+    queryset = Inscripcion.objects.all()
+    serializer_class = InscripcionSerializer
 
 @api_view(['GET'])
 def estudiante_count(request):

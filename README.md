@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ## Cargar datos iniciales
 
 ```sh
-python manage.py loaddata dump_inventario
+python manage.py loaddata inscripcion_dump
 ```
 
 ## Ejecutar servidor de desarrollo

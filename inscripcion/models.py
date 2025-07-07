@@ -2,14 +2,14 @@ import uuid
 
 from django.db import models
 
-from .validators import validar_par
+from .validators import validar_monto, validar_nombre
 
 
 # MODELO ESTUDIANTE
 class Estudiante(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    nombres = models.CharField(max_length=100)
-    apellidos = models.CharField(max_length=100)
+    nombres = models.CharField(max_length=100, validators=[validar_nombre])
+    apellidos = models.CharField(max_length=100, validators=[validar_nombre])
     ci = models.CharField(max_length=20, unique=True)
     email = models.EmailField(blank=True, null=True)
     telefono = models.CharField(max_length=20, blank=True, null=True) 
@@ -19,9 +19,9 @@ class Estudiante(models.Model):
 
 # MODELO COSTOS
 class Costo(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    tipo = models.CharField(max_length=100)
-    monto = models.DecimalField(max_digits=10, decimal_places=2) 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
+    tipo = models.CharField(max_length=100, validators=[validar_nombre])
+    monto = models.DecimalField(max_digits=10, decimal_places=2, validators=[validar_monto])
 
     def __str__(self):
         return f'{self.monto} - {self.tipo}'
@@ -29,7 +29,7 @@ class Costo(models.Model):
 
 # MODELO CURSO
 class Curso(models.Model):
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(max_length=100, validators=[validar_nombre])
     descripcion = models.TextField(blank=True, null=True)
     duracion_horas = models.IntegerField()
     fecha_inicio = models.DateField()

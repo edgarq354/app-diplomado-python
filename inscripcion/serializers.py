@@ -3,11 +3,11 @@ from itertools import product
 from rest_framework import serializers
 
 from .models import Estudiante, Curso, Costo, Inscripcion
-from .validators import validar_nombre
+
 
 
 # SERIALIZER ESTUDIANTE
-class EstudianteSerializer(serializers.ModelSerializer):
+class EstudianteSerializer(serializers.ModelSerializer): 
     class Meta:
         model = Estudiante
         fields = '__all__'
@@ -22,6 +22,8 @@ class CursoSerializer(serializers.ModelSerializer):
 
 # SERIALIZER COSTO
 class CostoSerializer(serializers.ModelSerializer):
+    monto = serializers.DecimalField(max_digits=10, decimal_places=2)
+
     class Meta:
         model = Costo
         fields = '__all__'
