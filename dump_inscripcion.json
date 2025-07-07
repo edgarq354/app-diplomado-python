@@ -1,0 +1,24 @@
+[
+  {
+    "model": "inscripcion.estudiante",
+    "pk": "b7d9f89d-1a2b-4bcb-9d32-fd09c29e7583",
+    "fields": {
+      "nombres": "Pedro",
+      "apellidos": "López",
+      "ci": "5555555",
+      "email": "pedro@example.com",
+      "telefono": "78945612"
+    }
+  },
+  {
+    "model": "inscripcion.curso",
+    "pk": 1,
+    "fields": {
+      "nombre": "Curso de Python",
+      "descripcion": "Aprendé a programar en Python",
+      "duracion_horas": 50,
+      "fecha_inicio": "2025-07-15",
+      "fecha_fin": "2025-08-15"
+    }
+  }
+]
